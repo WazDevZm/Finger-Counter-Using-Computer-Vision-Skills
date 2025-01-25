@@ -1,4 +1,4 @@
-#Learn
+#By Wazungwa Mugala
 #Finger Counter App using Computer Vision, Hand Tracking
 import cv2
 import time
