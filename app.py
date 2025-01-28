@@ -2,6 +2,7 @@
 #I'm a student at the Copperbelt Univesity Studying Computer Science!
 #I love God!
 #Finger Counter App using Computer Vision, Hand Tracking
+#Importing all impossible 
 import cv2
 import time
 import HandTrackingModule as htm
