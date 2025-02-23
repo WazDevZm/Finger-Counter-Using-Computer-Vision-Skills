@@ -33,9 +33,6 @@ while True:
         print("Failed to capture image from camera")
         break
 
-    # Resize image for better performance (optional, can remove if not needed)
-    # img = cv2.resize(img, (wCam // 2, hCam // 2))  # Resize to half size
-
     # Convert the image to RGB for mediapipe
     imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
@@ -51,11 +48,8 @@ while True:
         # Draw the landmarks on the hand
         mp_draw.draw_landmarks(img, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
-        # Count fingers (exclude the thumb)
-        # Index
-        if hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].y < hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_DIP].y:
-            finger_count += 1
-
+        # Count fingers (exclude the thumb and index finger)
+        
         # Middle
         if hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].y < hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_DIP].y:
             finger_count += 1
