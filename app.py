@@ -7,6 +7,8 @@ import cv2
 import HandTrackingModule as htm
 import os
 import time
+import mediapipe as mp
+
 
 # Camera dimensions
 wCam, hCam = 640, 480
@@ -33,8 +35,12 @@ for imPath in myList:
 print("Total Overlays Loaded:", len(overlayList))
 PTime = 0
 
+detector = htm.handDetector(detectionCon=0.5)
+
+
 while True:
     success, img = cap.read()
+    img = detector.findHands(img)
     
     if not success:
         print("Failed to capture image from camera")
@@ -46,7 +52,8 @@ while True:
         img[0:200, 0:200] = overlayList[3]  # Place resized overlay on frame
         cTime = time.time()
         fps = 1/(cTime - PTime)
-        cv2.putText(img, f'FPS: {int(fps)}', (400, 70), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 0, 0), 3)
+        PTime = cTime
+        cv2.putText(img, f'FPS: {int(fps)}', (400, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3)
     cv2.imshow("Computer Vision", img)
 
     # Exit if 'q' is pressed
