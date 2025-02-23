@@ -31,6 +31,7 @@ for imPath in myList:
     overlayList.append(image)
 
 print("Total Overlays Loaded:", len(overlayList))
+PTime = 0
 
 while True:
     success, img = cap.read()
@@ -43,7 +44,9 @@ while True:
     if len(overlayList) > 0:
         h,w,c = overlayList[0].shape
         img[0:200, 0:200] = overlayList[3]  # Place resized overlay on frame
-
+        cTime = time.time()
+        fps = 1/(cTime - PTime)
+        cv2.putText(img, f'FPS: {int(fps)}', (400, 70), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 0, 0), 3)
     cv2.imshow("Computer Vision", img)
 
     # Exit if 'q' is pressed
